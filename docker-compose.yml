@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  client:
+    build: ./client
+    command: sh -c "npm run build"
+    volumes:
+      - web-client-build:/app/build
+    expose:
+      - 3000  
+  server:
+    build: ./server
+    command: sh -c "npm run build && npm run prod"
+    expose:
+      - 5000
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    ports:
+      - '27017:27017'
+  
+
+
+
+
+      
