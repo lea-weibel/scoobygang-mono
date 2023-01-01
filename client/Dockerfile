@@ -11,4 +11,7 @@ COPY tsconfig.json ./
 COPY public public
 COPY src src
 
-CMD npm start
+RUN npm run build && \
+    npm install -g serve
+    
+CMD serve -s build
