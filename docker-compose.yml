@@ -2,25 +2,21 @@ version: '3'
 
 services:
   client:
-    build: ./client
-    command: sh -c "npm run build"
-    volumes:
-      - web-client-build:/app/build
-    expose:
-      - 3000  
+    container_name: scoobyfront
+    image: leaweibel/scoobyfront
+    ports:
+      - '3000:3000'
   server:
-    build: ./server
-    command: sh -c "npm run build && npm run prod"
-    expose:
-      - 5000
+    container_name: scoobyback
+    image: leaweibel/scoobyback
+    ports:
+      - '5000:5000'
     depends_on:
       - mongodb
   mongodb:
     image: mongo
     ports:
       - '27017:27017'
-  volumes:
-     web-client-build:
   
 
 
